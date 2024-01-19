@@ -23,5 +23,7 @@ public class userinput{
         // String str = sc.next();
         String str = sc.nextLine();
         System.out.println(str);
+        System.out.println(64>6 && 64>8);
     }
 }
+
