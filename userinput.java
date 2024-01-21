@@ -26,4 +26,3 @@ public class userinput{
         System.out.println(64>6 && 64>8);
     }
 }
-
