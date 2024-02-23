@@ -21,4 +21,10 @@ public class firstInherit {
         C obj = new C();
         obj.fun(); // Calling the fun() method of class B
     }
+
 }
+
+
+
+
+
