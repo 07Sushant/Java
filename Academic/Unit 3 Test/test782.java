@@ -1,39 +1,55 @@
 import java.util.Scanner;
 
-class StaffMember {
-public void showDetails() {
-System.out.println("Displaying staff member details");
-}
+// Abstract class CoffeeMachine
+abstract class CoffeeMachine {
+int water;
+
+abstract void addWater(int cups);
+abstract void brewCoffee(int cups);
 }
 
-class Professor extends StaffMember {
+// Concrete subclass BasicCoffeeMachine
+class BasicCoffeeMachine extends CoffeeMachine {
 @Override
-public void showDetails() {
-Scanner scanner = new Scanner(System.in);
-System.out.print("Field of expertise for the professor: ");
-String fieldOfExpertise = scanner.nextLine();
-System.out.println("Staff member is a professor specialized in " + fieldOfExpertise);
-}
+void addWater(int cups) {
+water += cups;
+System.out.println("Added " + cups + " cups of water to the coffee machine.");
 }
 
-class AdministrativeStaff extends StaffMember {
 @Override
-public void showDetails() {
-Scanner scanner = new Scanner(System.in);
-System.out.print("Department of the administrative staff: ");
-String department = scanner.nextLine();
-System.out.println("Staff member works in the " + department + " department");
+void brewCoffee(int cups) {
+if (water >= cups) {
+water -= cups;
+System.out.println("Brewed " + cups + " cups of coffee.");
+} else {
+System.out.println("Not enough water to brew coffee.");
+}
 }
 }
 
-public class test782 {
+public class Main {
 public static void main(String[] args) {
-// Creating instances of the subclasses
-Professor professorInstance = new Professor();
-AdministrativeStaff adminStaffInstance = new AdministrativeStaff();
+// Create an instance of BasicCoffeeMachine
+BasicCoffeeMachine coffeeMachine = new BasicCoffeeMachine();
 
-// Calling showDetails() for each instance
-professorInstance.showDetails();
-adminStaffInstance.showDetails();
+// Create a Scanner object to get user input
+Scanner scanner = new Scanner(System.in);
+
+// Prompt the user for the number of cups of coffee
+System.out.print("Enter the number of cups of coffee: ");
+int coffeeCups = scanner.nextInt();
+
+// Prompt the user for the number of cups of water
+System.out.print("Enter the number of cups of water: ");
+int waterCups = scanner.nextInt();
+
+// Add water to the coffee machine
+coffeeMachine.addWater(waterCups);
+
+// Brew a cup of coffee
+coffeeMachine.brewCoffee(coffeeCups);
+
+// Close the scanner
+scanner.close();
 }
 }

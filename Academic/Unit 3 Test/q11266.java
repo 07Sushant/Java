@@ -1,33 +1,45 @@
-package q11266;
+import java.util.Scanner;
 
-class Addition {
-public static int add(int a, int b) {
-return a + b;
+interface PasswordChecker {
+    String checkLength(String password);
+    String checkComplexity(String password);
 }
 
-public static float add(int a, float b) {
-return a + b;
+class SimplePasswordChecker implements PasswordChecker {
+    @Override
+    public String checkLength(String password) {
+        int length = password.length();
+        return "Length: " + length;
+    }
+
+    @Override
+    public String checkComplexity(String password) {
+        // Check if the password contains any special characters
+        boolean hasSpecialChar = password.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?].*");
+        // Check if the password contains both letters and numbers
+        boolean hasLettersAndNumbers = password.matches(".*[a-zA-Z].*") && password.matches(".*\\d.*");
+
+        if (hasSpecialChar && hasLettersAndNumbers) {
+            return "Strong";
+        } else if (!hasSpecialChar && hasLettersAndNumbers) {
+            return "Medium";
+        } else {
+            return "Weak";
+        }
+    }
 }
 
-public static float add(float a, float b) {
-return a + b;
-}
+public class CheckPassword {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a password: ");
+        String password = scanner.nextLine();
 
-public static double add(float a, double b, double c) {
-return a + b + c;
-}
+        PasswordChecker simpleChecker = new SimplePasswordChecker();
 
-public static void main(String[] args) {
-int a = Integer.parseInt(args[0]);
-int b = Integer.parseInt(args[1]);
-float c = Float.parseFloat(args[2]);
-float d = Float.parseFloat(args[3]);
-double e = Double.parseDouble(args[4]);
-double f = Double.parseDouble(args[5]);
+        System.out.println(simpleChecker.checkLength(password));
+        System.out.println(simpleChecker.checkComplexity(password));
 
-System.out.println("Sum of " + a + " and " + b + " is " + add(a, b));
-System.out.println("Sum of " + c + " and " + d + " is " + add(c, d));
-System.out.println("Sum of " + b + " and " + d + " is " + add(b, d));
-System.out.println("Sum of " + c + ", " + e + " and " + f + " is " + add(c, e, f));
-}
+        scanner.close();
+    }
 }

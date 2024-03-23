@@ -1,28 +1,39 @@
-interface A{
-    void prime();
+package q11277;
+
+class Animal {
+void whoAmI() {
+System.out.println("I am a generic animal");
+}
 }
 
-class B{
-    void prime()
-    {
-        System.out.println("this is class B");
-    }
+class Dog extends Animal {
+void whoAmI() {
+System.out.println("I am a dog");
+}
 }
 
-class C extends B implements A{
-    public void prime()
-    {
-        System.out.println("this is class c");
-    }
-
+class Cow extends Animal {
+void whoAmI() {
+System.out.println("I am a cow");
+}
 }
 
-public class prime_interface {
-    public static void main(String[] args) {
-        
-         C obj = new C();
-         obj.prime();
+class Snake extends Animal {
+void whoAmI() {
+System.out.println("I am a snake");
+}
+}
 
-    }
-    
+public class RuntimePolymorphismDemo {
+public static void main(String[] args) {
+Animal ref1 = new Animal();
+Animal ref2 = new Dog();
+Animal ref3 = new Cow();
+Animal ref4 = new Snake();
+
+ref1.whoAmI();
+ref2.whoAmI();
+ref3.whoAmI();
+ref4.whoAmI();
+}
 }
