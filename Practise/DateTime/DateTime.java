@@ -7,6 +7,7 @@ public class DateTime {
         
         // Getting current date
         LocalDate today = LocalDate.now();
+        System.out.println(today);
 
         // Getting year
         int year = today.getYear();

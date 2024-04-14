@@ -6,3 +6,5 @@ public class dec {
     }
     
 }
+
+int arr[] = new int[n];
