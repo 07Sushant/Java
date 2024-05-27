@@ -1,0 +1,445 @@
+Unit 5  Industry question 
+------------------------------------------------------------
+//File Name: q27703/CTJ27703.java
+//==================================
+package q27703;
+import java.util.*;
+public class CTJ27703{
+public int removedup(int[] N)
+{
+	if(N.length == 0)
+	{
+		return 0;
+	}
+	int k = 1;
+	for(int i  =1;i < N.length; i++)
+	{
+		if(N[i] != N[i-1])
+		{
+			N[k] = N[i];
+			k++;
+		}
+	}
+	return k;
+}
+public static void main(String[] main)
+{
+	CTJ27703 sp = new CTJ27703();
+	Scanner sc = new Scanner(System.in);
+	String ip  = sc.nextLine();
+	String[] nums  = ip.split(",");
+	int[] N = new int[nums.length];
+	// int k = removedup(nums);
+	for(int i = 0 ; i < nums.length; i++)
+	{
+		N[i] = Integer.parseInt(nums[i].trim());
+	}
+	int k = sp.removedup(N);
+	System.out.println(k);
+}
+}
+
+------------------------------------------------------------------------------------------------
+
+//File Name: q21631/CTJ21631.java
+//==================================
+package q21631;
+import java.util.*;
+public class CTJ21631
+{
+	public List<String> restoreIp(String s)
+	{
+		List<String> result = new ArrayList<>();
+		if(s == null || s.length() < 4 || s.length() > 12)
+		{
+			return result;
+		}
+		backtrack(result ,s , new StringBuilder(),0, 0);
+		return result;
+	}
+	private void backtrack(List<String> result, String s, StringBuilder current, int start, int dots)
+	{
+		if(start==s.length() && dots == 4)
+		{
+			result.add(current.toString());
+			return;
+		}
+		if(dots > 4)
+		
+	{
+		return;
+	}
+		for(int i = start; i < s.length(); i++)
+		{
+			String segment = s.substring(start,  i+1);
+			if(isValid(segment))
+			{
+				int len = current.length();
+				if(dots < 3)
+				{
+					current.append(segment).append('.');
+				}
+				else
+				{
+					current.append(segment);
+				}
+				// path.add(part);
+				backtrack(result, s, current,  i+1, dots+1);
+				current.setLength(len);
+			}
+			if(s.charAt(start) == '0')
+			{
+				break;
+			}
+		}
+	}
+	private boolean isValid(String segment)
+	{
+		try{
+		if(segment.length() > 1 && segment.startsWith("0"))
+		{
+			return false;
+		}
+		int num = Integer.parseInt(segment);
+		return num >= 0 && num <= 255;
+		}
+		catch(NumberFormatException e)
+		{
+			return false;
+		}
+	}
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		sc.close();
+		CTJ21631 solution= new CTJ21631();
+		List<String> result1 = solution.restoreIp(input);
+		if(result1.isEmpty())
+		{
+			System.out.println("Invalid");
+		}
+		else if(result1.isEmpty() || (result1.size()==1 && result1.get(0).equals("Empty")))
+		{
+			System.out.println("Empty");
+		}
+		else
+		{
+			for(String ip : result1)
+			{
+				System.out.println(ip);
+			}
+		}
+	}
+}
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+File Name: q29133/QuizScorer.java
+//==================================
+package q29133;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class QuizScorer {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int numQuestions = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        Map<Integer, Integer> correctAnswers = new HashMap<>();
+        
+        // write the code..
+        for(int i = 1;i <= numQuestions; i++)
+        {
+        	System.out.print("Correct answer for Question " + i + ": ");
+        	int correctAnswer = scanner.nextInt();
+        	correctAnswers.put(i, correctAnswer);
+        }
+        int score = 0;
+        for(int i = 1; i <= numQuestions; i++)
+        {
+        	System.out.print("Student answer for Question " + i + ": ");
+        	int studentAnswer = scanner.nextInt();
+        	if(correctAnswers.containsKey(i) && correctAnswers.get(i) == studentAnswer)
+        	{
+        		score++;
+        	}
+        }
+        System.out.println(score + " out of " + numQuestions);
+        scanner.close();
+        
+    }
+}
+
+
+----------------------------------------------------------------------------
+//File Name: q29133/AnagramChecker.java
+//==================================
+package q29133;
+import java.util.HashMap;
+import java.util.Scanner;
+
+// public class AnagramChecker {
+import java.util.*;
+public class AnagramChecker{
+    public static void main(String[]  args){ 
+Scanner sc = new Scanner(System.in);
+String str1 = sc.nextLine();
+String str2 = sc.nextLine();
+if(areAna(str1, str2))
+{
+	System.out.println(str1 + " and " + str2 + " are anagrams");
+}
+else{
+    // public static void main(String[] args) {
+    //     Scanner scanner = new Scanner(System.in);
+    //     String str1 = scanner.nextLine();
+    //     String str2 = scanner.nextLine();
+
+        // if (areAnagrams(str1, str2)) {
+        //     System.out.println(str1 + " and " + str2 + " are anagrams");
+        // } else {
+            System.out.println(str1 + " and " + str2 + " are not anagrams");
+        // }
+        // scanner.close();
+    }
+// }
+}
+public static boolean areAna(String str1, String str2)
+{
+	str1 = str1.replaceAll("[^a-zA-Z0-9]", "");
+	str2 = str2.replaceAll("[^a-zA-Z0-9]", "");
+	if(str1.length() != str2.length())
+	{
+		return false;
+	}
+	char[] charArray1 = str1.toCharArray();
+	char[] charArray2 = str2.toCharArray();
+	Arrays.sort(charArray1);
+	Arrays.sort(charArray2);
+	return Arrays.equals(charArray1, charArray2);
+}
+}
+
+-------------------------------------------------------------------------------
+
+
+//File Name: q29141/PalindromeChecker.java
+//==================================
+package q29141;
+// import java.util.HashMap;
+import java.util.Scanner;
+
+public class PalindromeChecker {
+public static void main(String[] args){
+	// write the code..
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		String clean = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+		String reverse1 = new StringBuilder(clean).reverse().toString();
+		boolean isPalindrome = clean.equals(reverse1);
+		if(isPalindrome){
+    // public static void main(String[] args) {
+        // Scanner scanner = new Scanner(System.in);
+        // String input = scanner.nextLine();
+
+        // if (isPalindrome(input)) {
+            System.out.println("\"" + input + "\" is a palindrome");
+        } else {
+            System.out.println("\"" + input + "\" is not a palindrome");
+        }
+
+        // scanner.close();
+    }
+}
+
+
+
+----------------------------------------------------------------------------
+
+Deque
+-----------------------------------------------------------------
+
+//File Name: q29238/PalindromeChecker.java
+//==================================
+package q29238;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Scanner;
+
+public class PalindromeChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        if (isPalindrome(input)) {
+            System.out.println(input + " is a palindrome");
+        } else {
+            System.out.println(input + " is not a palindrome");
+        }
+
+        scanner.close();
+    }
+
+    public static boolean isPalindrome(String str) {
+        Deque<Character> deque = new ArrayDeque<>();
+
+		// write the code..
+        String clean = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        for(char c : clean.toCharArray())
+        {
+        	deque.add(c);
+        }
+        while(deque.size() > 1)
+        {
+        	if(!deque.pollFirst().equals(deque.pollLast()))
+        	{
+        		return false;
+        	}
+        }
+        return true;
+}
+}
+
+
+--------------------------------------------------------------------------------------
+
+//File Name: q29238/PalindromeChecker.java
+//==================================
+package q29238;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Scanner;
+
+public class PalindromeChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        if (isPalindrome(input)) {
+            System.out.println(input + " is a palindrome");
+        } else {
+            System.out.println(input + " is not a palindrome");
+        }
+
+        scanner.close();
+    }
+
+    public static boolean isPalindrome(String str) {
+        Deque<Character> deque = new ArrayDeque<>();
+
+		// write the code..
+        String clean = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        for(char c : clean.toCharArray())
+        {
+        	deque.add(c);
+        }
+        while(deque.size() > 1)
+        {
+        	if(!deque.pollFirst().equals(deque.pollLast()))
+        	{
+        		return false;
+        	}
+        }
+        return true;
+}
+}
+
+
+
+
+
+
+-----------------------------------------------------------------
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.Scanner;
+
+class Customer {
+String name;
+int urgencyLevel;
+
+public Customer(String name, int urgencyLevel) {
+this.name = name;
+this.urgencyLevel = urgencyLevel;
+}
+
+public String toString() {
+return name + " (urgency level " + urgencyLevel + ")";
+}
+}
+
+public class CallCenterSystem {
+
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+Queue<Customer> callQueue = new ArrayDeque<>();
+
+while (true) {
+System.out.println("1. Join Queue");
+System.out.println("2. Handle Call");
+System.out.println("3. View Queue");
+System.out.println("4. Exit");
+
+int choice = scanner.nextInt();
+scanner.nextLine(); // Consume newline
+
+switch (choice) {
+case 1:
+System.out.println("Customer name: ");
+String name = scanner.nextLine();
+System.out.println("Urgency level (1-3): ");
+int urgencyLevel = scanner.nextInt();
+scanner.nextLine(); // Consume newline
+callQueue.add(new Customer(name, urgencyLevel));
+System.out.println(name + " joined with urgency level " + urgencyLevel);
+break;
+case 2:
+if (!callQueue.isEmpty()) {
+Customer highestPriorityCustomer = callQueue.peek();
+for (Customer customer : callQueue) {
+if (customer.urgencyLevel > highestPriorityCustomer.urgencyLevel) {
+highestPriorityCustomer = customer;
+}
+}
+callQueue.remove(highestPriorityCustomer);
+System.out.println("Handling call from " + highestPriorityCustomer);
+} else {
+System.out.println("Call queue is empty");
+}
+break;
+case 3:
+if (!callQueue.isEmpty()) {
+System.out.println("Current queue:");
+for (Customer customer : callQueue) {
+System.out.println(customer);
+}
+} else {
+System.out.println("Call queue is empty");
+}
+break;
+case 4:
+System.out.println("Finish");
+System.exit(0);
+default:
+System.out.println("Invalid choice");
+}
+}
+}
+}
+
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
