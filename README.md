@@ -1,11 +1,10 @@
 # The Complete Journey of 99% Object Oriented Programming
 
-# CodeTantra
+## 🔴Academic Folder Contains all the necesarry files and program code to excel in Academic parts
 
-## Academic Folder Contains all the necesarry files and program code to excel in Academic parts
-## Rest Folder contains all the things that is required to learn Java and Clear the ETPs
+## 🔴 Rest Folder contains all the things that is required to learn Java and Clear the ETPs
 
-## Make sure you fork and raise a request if you found any errors or have a doubt
+## 🔴 Make sure you fork and raise a request if you found any errors or have a doubt
 
 
 🟢🔴 
